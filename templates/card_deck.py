@@ -1,7 +1,7 @@
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
-import dash_bootstrap_components as bsc
+import dash_bootstrap_components as dbc
 from dash.dependencies import Input, Output, State
 
 layout = html.Div([
@@ -15,13 +15,3 @@ layout = html.Div([
     html.Br(),
     dcc.Link('Navigate to "/page-2"', href='/page-2'),
 ])
-
-# Page 1 callbacks
-@app.callback(Output('output-state', 'children'),
-              [Input('submit-button', 'n_clicks')],
-              [State('input-1-state', 'value'),
-               State('input-2-state', 'value')])
-def update_output(n_clicks, input1, input2):
-    return ('The Button has been pressed {} times,'
-            'Input 1 is "{}",'
-            'and Input 2 is "{}"').format(n_clicks, input1, input2)
