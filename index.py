@@ -6,6 +6,12 @@ from dash.dependencies import Input, Output
 
 from app import app
 from templates import prediction, card_deck
+from graph import load_data, plot_data
+
+url_bar_and_content_div = html.Div([
+    dcc.Location(id='url', refresh=False),
+    html.Div(id='page-content')
+])
 
 # index layout
 app.layout = html.Div(
@@ -17,6 +23,7 @@ app.layout = html.Div(
 
 # "complete" layout
 app.validation_layout = html.Div([
+    url_bar_and_content_div,
     prediction.layout,
     card_deck.layout,
 ])
@@ -33,10 +40,11 @@ def display_page(pathname):
         return '404'
 
 # # Page 1 callbacks
-@app.callback(Output('Placeholder', 'children'),
+@app.callback(Output('graph', 'figure'),
               [Input('submit_button', 'n_clicks')])
 def update_output(n_clicks):
-    return static/test.jpg
+    data = load_data()
+    return plot_data(data)
 
 if __name__ == '__main__':
     app.run_server(debug=True)

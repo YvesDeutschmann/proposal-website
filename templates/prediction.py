@@ -44,7 +44,10 @@ layout = html.Div(
         dbc.Row(
             [
                 dbc.Col(buttongroup, width=3),
-                dbc.Col("Placeholder", width=9)
+                dbc.Col(
+                    dcc.Graph(id='graph'), 
+                    width=9
+                )
             ]
         ),
 
