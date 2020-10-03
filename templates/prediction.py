@@ -5,55 +5,87 @@ import dash_bootstrap_components as dbc
 from dash.dependencies import Input, Output, State
 
 from app import app
+from graph import load_data, plot_data
 
-subject1_dd =  dcc.Dropdown(
-    options=[{"label": "Jess", "value": "Jess"}],
-    placeholder="Select subject 1 for prediction"
-    )
-
-subject2_dd =  dcc.Dropdown(
-    options=[{"label": "Yves", "value": "Yves"}],
-    placeholder="Select subject 2 for prediction"
-    )
-
-timeframe_dd =  dcc.Dropdown(
-    options=[{"label": "forever", "value": "forever"}],
-    placeholder="Select timeframe for prediction"
-    )
-
-button = dbc.Button(
-    "Submit",
-    id="submit_button", 
-    color="success", 
-    block=True)
-
-buttongroup = html.Div(
+button_groups = dbc.Row(
     [
-        subject1_dd,
-        html.Br(), 
-        subject2_dd,
-        html.Br(),
-        timeframe_dd,
-        html.Br(),
-        button
+        dbc.Col(
+            [
+                dbc.ButtonGroup(
+                    [dbc.Button("Asset 1"), dbc.Button("Jess", outline=True)],
+                    size="lg",
+                    style={"width": "100%"},
+                )
+            ],
+            width=4
+        ),
+        
+        dbc.Col(
+            [
+                dbc.ButtonGroup(
+                    [dbc.Button("Asset 2"), dbc.Button("Yves", outline=True)],
+                    size="lg",
+                    style={"width": "100%"},
+                )
+            ],
+            width=4
+        ),
+        dbc.Col(
+            [
+                dbc.ButtonGroup(
+                    [dbc.Button("Timeframe"), dbc.Button("Forever", outline=True)],
+                    size="lg",
+                    style={"width": "100%"},
+                )
+            ],
+            width=4
+        ),
     ]
 )
 
-layout = html.Div(
+button = dcc.Link(
+    dbc.Button(
+        "Show me some details",
+        id="details_button", 
+        n_clicks=0,
+        color="success", 
+        block=True),
+    href='/cards'
+)
+
+analysis_card = dbc.CardBody(
+    [
+        html.H2("Analyis Results", className="card-subtitle"),
+        html.P(
+            "The analysis of the underlying data shows some ups & downs but there is clearly an positive overall trend. Future returns look promising so my advice is to hold on the asset.",
+            className="card-text",
+        ),
+        dbc.Row(
+            dbc.Col(button)
+        )
+    ]
+),
+
+input_card = dbc.CardBody(
+    [
+        html.H2("Analyis run for", className="card-title"),
+        button_groups
+    ]
+)
+
+data = load_data()
+figure = plot_data(data)
+            
+
+layout = dbc.Jumbotron(
     [
         dbc.Row(
             [
-                dbc.Col(buttongroup, width=3),
-                dbc.Col(
-                    dcc.Graph(id='graph'), 
-                    width=9
-                )
+                dbc.Col(input_card, width=6),
+                dbc.Col(analysis_card, width= 6),
+                
             ]
         ),
-
-        html.Br(),
-
-        dcc.Link('Navigate to "/page-1"', href='/page-1')
+        dcc.Graph(id='graph', figure=figure)
     ],
-className="dash-bootstrap p-5"
 )
