@@ -21,12 +21,16 @@ timeframe_dd =  dcc.Dropdown(
     placeholder="Select timeframe for prediction"
     )
 
-button = dbc.Button(
-    "Analyze",
-    id="analyze_button", 
-    n_clicks=0,
-    color="success", 
-    block=True)
+button = dcc.Link(
+    dbc.Button(
+        "Analyze",
+        id="analyze_button", 
+        n_clicks=0,
+        color="success", 
+        block=True),
+    href='/prediction'
+)
+
 
 buttongroup = html.Div(
     [
