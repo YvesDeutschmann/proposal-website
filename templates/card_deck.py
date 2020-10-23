@@ -3,6 +3,7 @@ import dash_core_components as dcc
 import dash_html_components as html
 import dash_bootstrap_components as dbc
 from dash.dependencies import Input, Output, State, ClientsideFunction
+from dash.exceptions import PreventUpdate
 
 from app import app
 
@@ -183,6 +184,31 @@ test = html.Div(
     id = 'test'
 )
 
+test2 = html.Div(
+    [
+        html.Div(
+            [
+                html.Img(
+                    src='/static/question.png',
+                    className = "cards_image"
+                ),
+                html.H1("Click Me!")
+            ],
+            className = "cards_front"
+        ),
+        html.Div(
+            [
+                html.Img(src='/static/sample200.png'),
+                html.H1("Some Name"),
+                html.P("Some funnyx text...")
+            ],
+            className = "cards_back"
+        )
+    ],
+    className = "cards_single",
+    id = 'test2'
+)
+
 layout = html.Div(
     [
         # dbc.Row(
@@ -194,21 +220,31 @@ layout = html.Div(
         #     style={"width":"100%"}
         # ),
         # row3
-        dbc.Col(
-            test,
-            width=2
+        dbc.Row(
+            [
+                dbc.Col(
+                    test,
+                    width=2
+                ),
+                dbc.Col(
+                    test2,
+                    width=2
+                )
+            ]
         )
         
     ]
 )
 
-@app.callback(
-    Output('test', 'className'),
-    [Input('test', 'n_clicks')]
-)
-def flip_card(n_clicks):
-    
-    if (n_clicks % 2 == 0):
-        return "cards_single"
-    else:
-        return "cards_single flip"
+for element in  ['test', 'test2']:
+    @app.callback(
+        Output(element, 'className'),
+        [Input(element, 'n_clicks')]
+    )
+    def flip_card(n_clicks):
+        if n_clicks is None:
+            raise PreventUpdate
+        elif (n_clicks % 2 == 0):
+            return "cards_single"
+        else:
+            return "cards_single flip"
