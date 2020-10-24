@@ -37,26 +37,7 @@ def display_page(pathname):
     else:
         return '404'
 
-# Card Deck callbacks
-@app.callback(
-    Output("yes_collapse", "is_open"),
-    [Input("answer_button", "n_clicks")],
-    [State("yes_button", "is_open")],
-)
-def toggle_yes(click, is_open):
-    if click:
-        return not is_open
-    return is_open
 
-@app.callback(
-    Output("no_collapse", "is_open"),
-    [Input("answer_button", "n_clicks")],
-    [State("no_button", "is_open")],
-)
-def toggle_left(click, is_open):
-    if click:
-        return not is_open
-    return is_open
 
 if __name__ == '__main__':
     app.run_server(debug=True)

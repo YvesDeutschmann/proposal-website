@@ -27,12 +27,13 @@
 
 .cards_image {
   text-align: center;
-  width: auto;
+  /* width: auto; */
   border-radius: 16px;
+  width: 200px;
+  height: 200px;
 }
 
 .cards_front img {
-  margin: 0;
   width: 200px;
   height: 250px;
 }
@@ -58,4 +59,26 @@
   left: 0;
   top: 10px;
   color: #20263f;
+}
+
+.cards_gif {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  border-radius: 16px;
+  width: 200px;
+  height: 250px;
+  top: 10px;
+  background: lightslategray;
+}
+
+.cards_gif img{
+  width: 200px;
+  height: 200px;
+  margin-bottom: 5px;
+}
+
+.cards_empty{
+  background-color: transparent;
+  border: transparent;
 }
