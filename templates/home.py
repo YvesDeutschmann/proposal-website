@@ -27,7 +27,8 @@ button = dcc.Link(
         id="analyze_button", 
         n_clicks=0,
         color="success", 
-        block=True),
+        block=True,
+        size='lg'),
     href='/prediction'
 )
 
@@ -46,15 +47,13 @@ buttongroup = html.Div(
 
 jumbotron = dbc.Jumbotron(
     [
-        html.H1("Asset Forecast", className="display-3"),
-        html.P(
-            "This is a simple app to forecast developments on specific assets",
-            className="lead",
-        ),
-        html.Hr(className="my-2"),
+        html.H1("Asset Forecast"),
+        html.P("This is a simple app to forecast developments on specific assets"),
+        html.Hr(),
         html.P("Please choose from the assets below and start the prediction."),
         buttongroup,
-    ]
+    ],
+    className='jumbo'
 )
 
 layout = dbc.Row(

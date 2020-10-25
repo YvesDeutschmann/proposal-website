@@ -95,3 +95,10 @@
   font-size: large;
   text-align: justify;
 }
+
+.jumbo {
+  margin-top: 20%;
+  font-size: large;
+  justify-content: center;
+  align-items: center;
+}
