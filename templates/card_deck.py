@@ -140,11 +140,13 @@ def generate_option_modal(option):
     """
     header_yes = 'She said YES!'
     src_yes = 'https://media.giphy.com/media/s2qXK8wAvkHTO/giphy.gif'
-    text_yes = 'This goes rioght along with my prediction. Good choice in the first place and now hold on to this asset. Also grab a drink and celebrate!'
+    text_yes = 'This goes right along with my prediction. Good choice in the first place and now hold on to this asset. Also grab a drink and celebrate!'
     button_yes = dbc.Button(
         "Alright, gimme that ring!",
         id='final_yes',
         color='success',
+        block=True,
+        size='lg'
     )
 
     header_no = 'Say whut?'
@@ -154,11 +156,15 @@ def generate_option_modal(option):
         "Well, kill those puppies...",
         id='final_no',
         color='danger',
+        block=True,
+        size='lg'
     )
 
     return dbc.Modal(
             [
-                dbc.ModalHeader(header_yes if option == 'yes' else header_no),
+                html.H1(
+                    header_yes if option == 'yes' else header_no
+                ),
                 dbc.ModalBody(
                     [
                         html.Img(
@@ -168,7 +174,7 @@ def generate_option_modal(option):
                     ]
                 ),
                 dbc.ModalFooter(
-                    button_yes if option == 'yes' else button_no
+                    button_yes if option == 'yes' else button_no,
                 ),
             ],
             id="{}_modal".format(option),
@@ -218,13 +224,11 @@ decisions = generate_decision_objects()
 empty_card = dbc.Card(className="cards_empty")
 final_modal = dbc.Modal(
             [
-                dbc.ModalHeader("We belong together"),
+                html.P("Well, whatever your choice was you finally landed here and I'm gonna put a ring on it!"),
                 dbc.ModalBody(
-                        html.Img(src='https://media.giphy.com/media/tITrKnHs2nK9qliRYM/giphy.gif')
+                        html.Img(src='https://media.giphy.com/media/ker4x1QNXoCmHevaw2/giphy.gif')
                 ),
-                dbc.ModalFooter(
-                    html.P("Well, whatever your choice was you finally landed here and I'm gonna put a ring on it!")
-                )
+                html.H1("Because we belong together!")
             ],
             id='final_modal',
             centered=True,

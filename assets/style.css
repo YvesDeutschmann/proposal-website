@@ -82,3 +82,11 @@
   background-color: transparent;
   border: transparent;
 }
+
+.modal {
+  flex: auto;
+  border-radius: 16px;
+  text-align: center;
+  align-items: center;
+  font-size: large;
+}
