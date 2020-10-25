@@ -127,20 +127,69 @@ def generate_option_card(option):
                 )
             ],
             className = "cards_single",
-            id = '{}_collapse'.format(option)
+            id = '{}_collapse'.format(option),
         )
 
-def generate_decision_cards():
+def generate_option_modal(option):
     """
-    Generates cards for answer options 'Yes' & 'No'.
+    Serves modal depending on the chosen answer.
+    Input:
+    option - str - choses answer ('yes' OR 'no')
+    Returns:
+    modal - html object - modal object with content respective to the option
+    """
+    header_yes = 'She said YES!'
+    src_yes = 'https://media.giphy.com/media/s2qXK8wAvkHTO/giphy.gif'
+    text_yes = 'This goes rioght along with my prediction. Good choice in the first place and now hold on to this asset. Also grab a drink and celebrate!'
+    button_yes = dbc.Button(
+        "Alright, gimme that ring!",
+        id='final_yes',
+        color='success',
+        className='ml-auto'
+    )
+
+    header_no = 'Say whut?'
+    src_no = 'https://media.giphy.com/media/l3q2K5jinAlChoCLS/giphy.gif'
+    text_no = 'Please note: By confirming this choice countless puppies & kittens will be tortured and killed. Do you really want to confirm your choice?'
+    button_no = dbc.Button(
+        "Well, kill those puppies...",
+        id='final_no',
+        color='danger',
+        className='ml-auto'
+    )
+
+    return dbc.Modal(
+            [
+                dbc.ModalHeader(header_yes if option == 'yes' else header_no),
+                dbc.ModalBody(
+                    [
+                        html.Img(
+                        src= src_yes if option == 'yes' else src_no
+                        ),
+                        html.P(text_yes if option == 'yes' else text_no)
+                    ]
+                ),
+                dbc.ModalFooter(
+                    button_yes if option == 'yes' else button_no
+                ),
+            ],
+            id="{}_modal".format(option),
+            centered=True,
+        )
+
+def generate_decision_objects():
+    """
+    Generates cards & modals for answer options 'Yes' & 'No'.
     Returns:
     decisions - dictionary containing html objects
     """
     decisions = dict.fromkeys(['yes', 'no'])
 
     for option in decisions.keys():
-        html_object = generate_option_card(option)
-        decisions.update({option: html_object})
+        card = generate_option_card(option)
+        modal = generate_option_modal(option)
+        decisions[option] = {'card' : card, 'modal': modal}
+        
     return decisions
 
 def create_card_deck():
@@ -162,8 +211,10 @@ def create_card_deck():
         assignments.update({ str(key) : {'card': card}})
     return card_deck
 
+
+
 card_deck = create_card_deck()
-decisions = generate_decision_cards()
+decisions = generate_decision_objects()
 empty_card = dbc.Card(className="cards_empty")
 
 row1 = dbc.CardGroup(
@@ -195,11 +246,11 @@ row2 = dbc.CardGroup(
 row3 = dbc.Row(
     [
         dbc.Col(empty_card),
-        dbc.Col(decisions.get("yes")),
+        dbc.Col(decisions["yes"].get("card")),
         dbc.Col(empty_card),
         assignments['31']['card'],
         dbc.Col(empty_card),
-        dbc.Col(decisions.get("no")),
+        dbc.Col(decisions["no"].get("card")),
         dbc.Col(empty_card),
     ],
     justify='around'
@@ -244,6 +295,8 @@ layout = html.Div(
             dbc.Col(row3),
             style={"width":"100%"}
         ),
+        decisions["yes"].get("modal"),
+        decisions["no"].get("modal")
     ]
 )
 
@@ -260,11 +313,10 @@ for card in  card_deck:
         else:
             return "cards_single flip"
 
-# Card Deck callbacks
 @app.callback(
     Output("yes_collapse", "is_open"),
     [Input("answer_button", "n_clicks")],
-    [State("yes_button", "is_open")],
+    [State("yes_collapse", "is_open")],
 )
 def toggle_yes(click, is_open):
     if click:
@@ -274,9 +326,29 @@ def toggle_yes(click, is_open):
 @app.callback(
     Output("no_collapse", "is_open"),
     [Input("answer_button", "n_clicks")],
-    [State("no_button", "is_open")],
+    [State("no_collapse", "is_open")],
 )
 def toggle_no(click, is_open):
     if click:
+        return not is_open
+    return is_open
+
+@app.callback(
+    Output('yes_modal', 'is_open'),
+    [Input('yes_button', 'n_clicks')],
+    [State('yes_modal', 'is_open')]
+)
+def toggle_yes_modal(yes, is_open):
+    if yes:
+        return not is_open
+    return is_open
+
+@app.callback(
+    Output('no_modal', 'is_open'),
+    [Input('no_button', 'n_clicks')],
+    [State('no_modal', 'is_open')]
+)
+def toggle_no_modal(no, is_open):
+    if no:
         return not is_open
     return is_open
