@@ -145,7 +145,6 @@ def generate_option_modal(option):
         "Alright, gimme that ring!",
         id='final_yes',
         color='success',
-        className='ml-auto'
     )
 
     header_no = 'Say whut?'
@@ -155,7 +154,6 @@ def generate_option_modal(option):
         "Well, kill those puppies...",
         id='final_no',
         color='danger',
-        className='ml-auto'
     )
 
     return dbc.Modal(
@@ -175,6 +173,8 @@ def generate_option_modal(option):
             ],
             id="{}_modal".format(option),
             centered=True,
+            size='sm',
+            className='modal'
         )
 
 def generate_decision_objects():
@@ -216,6 +216,21 @@ def create_card_deck():
 card_deck = create_card_deck()
 decisions = generate_decision_objects()
 empty_card = dbc.Card(className="cards_empty")
+final_modal = dbc.Modal(
+            [
+                dbc.ModalHeader("We belong together"),
+                dbc.ModalBody(
+                        html.Img(src='https://media.giphy.com/media/tITrKnHs2nK9qliRYM/giphy.gif')
+                ),
+                dbc.ModalFooter(
+                    html.P("Well, whatever your choice was you finally landed here and I'm gonna put a ring on it!")
+                )
+            ],
+            id='final_modal',
+            centered=True,
+            size='lg',
+            className='modal'
+        )
 
 row1 = dbc.CardGroup(
     [
@@ -296,7 +311,8 @@ layout = html.Div(
             style={"width":"100%"}
         ),
         decisions["yes"].get("modal"),
-        decisions["no"].get("modal")
+        decisions["no"].get("modal"),
+        final_modal
     ]
 )
 
@@ -350,5 +366,16 @@ def toggle_yes_modal(yes, is_open):
 )
 def toggle_no_modal(no, is_open):
     if no:
+        return not is_open
+    return is_open
+
+@app.callback(
+    Output('final_modal', 'is_open'),
+    [Input('final_yes', 'n_clicks'),
+     Input('final_no', 'n_clicks')],
+    [State('final_modal', 'is_open')]
+)
+def toggle_final_modal(yes, no, is_open):
+    if yes or no:
         return not is_open
     return is_open
