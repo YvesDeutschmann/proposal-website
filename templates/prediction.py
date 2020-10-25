@@ -49,26 +49,27 @@ button = dcc.Link(
         id="details_button", 
         n_clicks=0,
         color="success", 
-        block=True),
+        block=True,
+        size='lg'),
     href='/cards'
 )
 
 analysis_card = dbc.CardBody(
     [
-        html.H2("Analyis Results", className="card-subtitle"),
+        html.H2("Analyis Results"),
         html.P(
             "The analysis of the underlying data shows some ups & downs but there is clearly an positive overall trend. Future returns look promising so my advice is to hold on the asset.",
-            className="card-text",
         ),
         dbc.Row(
             dbc.Col(button)
         )
-    ]
+    ], 
+    className='analysis_details'
 ),
 
 input_card = dbc.CardBody(
     [
-        html.H2("Analyis run for", className="card-title"),
+        html.H2("Analysis run for"),
         button_groups
     ]
 )
