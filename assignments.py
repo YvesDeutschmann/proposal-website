@@ -2,7 +2,7 @@ assignments = {
     '11': {
         'id': '11',
         'name': 'Bonnie & Jerry',
-        'image': '/static/11.jpg',
+        'image': '11.jpg',
     },
     '12': {
         'id': '12',
@@ -26,17 +26,17 @@ assignments = {
     },
     '16': {
         'id': '16',
-        'name': 'Grandma & Bryan',
+        'name': 'Eleanor & Bryan',
         'image': '16.jpg',
     },
     '17': {
         'id': '17',
-        'name': 'Marley',
+        'name': 'Emily',
         'image': '17.jpg',
     },
     '21': {
         'id': '21',
-        'name': 'Emily',
+        'name': 'Marley',
         'image': '21.jpg',
     },
     '22': {
