@@ -32,7 +32,7 @@ assignments = {
     '17': {
         'id': '17',
         'name': 'Emily',
-        'image': '17.jpg',
+        'image': '17_copy.jpg',
     },
     '21': {
         'id': '21',
