@@ -19,6 +19,7 @@ app.layout = url_bar_and_content_div
 # "complete" layout
 app.validation_layout = html.Div([
     url_bar_and_content_div,
+    home.layout,
     prediction.layout,
     card_deck.layout,
 ])
