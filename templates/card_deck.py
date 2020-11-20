@@ -24,7 +24,7 @@ def generate_card(id, image_src, name):
             html.Div(
                 [
                     html.Img(
-                        src='/static/question.png',
+                        src=app.get_asset_url('question.png'),
                         className = "cards_image"
                     ),
                     html.H1("Click Me!")
@@ -34,11 +34,10 @@ def generate_card(id, image_src, name):
             html.Div(
                 [
                     html.Img(
-                        src='/static/pics/{}'.format(image_src),
+                        src=app.get_asset_url(image_src),
                         className = "cards_image"
                     ),
-                    html.H1(name),
-                    html.P("Some funnyx text...")
+                    html.H1(name)
                 ],
                 className = "cards_back"
             )
@@ -62,7 +61,7 @@ def generate_mycard(id, image_src, name):
             html.Div(
                 [
                     html.Img(
-                        src='/static/question.png',
+                        src=app.get_asset_url('question.png'),
                         className = "cards_image"
                     ),
                     html.H1("Click Me!")
@@ -71,8 +70,12 @@ def generate_mycard(id, image_src, name):
             ),
             html.Div(
                 [
-                    html.Img(src='/static/{}'.format(image_src)),
-                    html.H1(name),
+                    html.Img(
+                        src=app.get_asset_url(image_src),
+                        className='cards_image'
+                    ),
+                        
+                    # html.H1(name),
                     dbc.Button(
                         "Answer", 
                         id='answer_button',
@@ -126,7 +129,7 @@ def generate_option_card(option):
                     className = "cards_gif",
                 )
             ],
-            className = "cards_single",
+            className = "cards_front",
             id = '{}_collapse'.format(option),
         )
 
@@ -236,76 +239,71 @@ final_modal = dbc.Modal(
             className='modal'
         )
 
-row1 = dbc.CardGroup(
+row1 = dbc.Row(
     [
-        assignments['11']['card'],
-        assignments['12']['card'],
-        assignments['13']['card'],
-        assignments['14']['card'],
-        empty_card,
-        assignments['15']['card'],
-        assignments['16']['card'],
-        assignments['17']['card']
-    ]
+        dbc.CardGroup(
+            [
+                assignments['11']['card'],
+                assignments['12']['card'],
+                assignments['13']['card'],
+                assignments['14']['card']
+            ]
+        ),
+        dbc.CardGroup(
+            [
+                assignments['15']['card'],
+                assignments['16']['card'],
+                assignments['17']['card']
+            ]
+        )
+    ],
+    className='cards_row'
 )
 
-row2 = dbc.CardGroup(
+row2 = dbc.Row(
     [
-        assignments['21']['card'],
-        assignments['22']['card'],
-        assignments['23']['card'],
-        assignments['24']['card'],
-        assignments['25']['card'],
-        empty_card,
-        assignments['26']['card'],
-        assignments['27']['card']
-    ]
+        dbc.CardGroup(
+            [
+                assignments['21']['card'],
+                assignments['22']['card'],
+                assignments['23']['card'],
+                assignments['24']['card'],
+                assignments['25']['card']
+            ]
+        ),
+        dbc.CardGroup(
+            [
+                assignments['26']['card'],
+                assignments['27']['card']
+            ]
+        ),
+        dbc.CardGroup(
+            assignments['31']['card']
+        ) 
+    ],
+    className='cards_row'
 )
 
 row3 = dbc.Row(
     [
-        dbc.Col(empty_card),
-        dbc.Col(decisions["yes"].get("card")),
-        dbc.Col(empty_card),
-        assignments['31']['card'],
-        dbc.Col(empty_card),
-        dbc.Col(decisions["no"].get("card")),
-        dbc.Col(empty_card),
+        # dbc.Col(empty_card),
+        decisions["yes"].get("card"),
+        # dbc.Col(empty_card),
+        # assignments['31']['card'],
+        # dbc.Col(empty_card),
+        decisions["no"].get("card"),
+        # dbc.Col(empty_card),
     ],
-    justify='around'
-)
-
-test = html.Div(
-    [
-        html.Div(
-            [
-                html.Img(
-                    src='/static/question.png',
-                    className = "cards_image"
-                ),
-                html.H1("Click Me!")
-            ],
-            className = "cards_front"
-        ),
-        html.Div(
-            [
-                html.Img(src='/static/sample200.png'),
-                html.H1("Some Name"),
-                html.P("Some funnyx text...")
-            ],
-            className = "cards_back"
-        )
-    ],
-    className = "cards_single",
-    id = 'test'
+    className='cards_row'
 )
 
 layout = html.Div(
     [
-        dbc.Row(
-            dbc.Col(row1),
-            style={"width":"100%"}
-        ),
+        # dbc.Row(
+        #     dbc.Col(row1),
+        #     style={"width":"100%"}
+        # ),
+        row1,
         dbc.Row(
             dbc.Col(row2),
             style={"width":"100%"}
