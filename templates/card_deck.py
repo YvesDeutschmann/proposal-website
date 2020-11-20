@@ -22,13 +22,10 @@ def generate_card(id, image_src, name):
     return html.Div(
         [
             html.Div(
-                [
-                    html.Img(
+                html.Img(
                         src=app.get_asset_url('question.png'),
                         className = "cards_image"
-                    ),
-                    html.H1("Click Me!")
-                ],
+                ),
                 className = "cards_front"
             ),
             html.Div(
@@ -37,7 +34,10 @@ def generate_card(id, image_src, name):
                         src=app.get_asset_url(image_src),
                         className = "cards_image"
                     ),
-                    html.H1(name)
+                    html.H1(
+                        name,
+                        className='cards_title'
+                    )
                 ],
                 className = "cards_back"
             )
@@ -59,13 +59,10 @@ def generate_mycard(id, image_src, name):
     return html.Div(
         [
             html.Div(
-                [
-                    html.Img(
+                html.Img(
                         src=app.get_asset_url('question.png'),
                         className = "cards_image"
-                    ),
-                    html.H1("Click Me!")
-                ],
+                ),
                 className = "cards_front"
             ),
             html.Div(
