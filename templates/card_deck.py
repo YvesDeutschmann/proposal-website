@@ -75,12 +75,12 @@ def generate_mycard(id, image_src, name):
                         className='cards_image'
                     ),
                         
-                    # html.H1(name),
                     dbc.Button(
                         "Answer", 
                         id='answer_button',
                         color='primary',
-                        block=True
+                        block=True,
+                        className='button'
                     ),
                 ],
                 className = "cards_back"
@@ -104,32 +104,21 @@ def generate_option_card(option):
                     [
                         html.Img(
                             src= src_yes if option == 'yes' else src_no,
-                            className = "cards_gif"
-                        ),
-                        dbc.Row(
-                            [
-                                dbc.Col(),
-                                dbc.Col(
-                                    [
-                                        dbc.Button(
-                                            option.upper(), 
-                                            id='{}_button'.format(option), 
-                                            color= 'success' if option == 'yes' else 'danger',
-                                            block=True,
-                                            size='large'
-                                        ),
-                                    ],
-                                    width=8
-                                ),
-                                dbc.Col()
-                            ],
-                            justify='center'
-                        )
+                            className = "cards_image"
+                        ),                       
+                        dbc.Button(
+                            option.upper(), 
+                            id='{}_button'.format(option), 
+                            color= 'success' if option == 'yes' else 'danger',
+                            block=True,
+                            size='large',
+                            className='button'
+                        )                           
                     ],
                     className = "cards_gif",
                 )
             ],
-            className = "cards_front",
+            className = "cards_single",
             id = '{}_collapse'.format(option),
         )
 
@@ -276,42 +265,29 @@ row2 = dbc.Row(
                 assignments['26']['card'],
                 assignments['27']['card']
             ]
-        ),
-        dbc.CardGroup(
-            assignments['31']['card']
-        ) 
+        )
     ],
     className='cards_row'
 )
 
 row3 = dbc.Row(
     [
-        # dbc.Col(empty_card),
+        dbc.Col(empty_card),
         decisions["yes"].get("card"),
-        # dbc.Col(empty_card),
-        # assignments['31']['card'],
-        # dbc.Col(empty_card),
+        dbc.Col(empty_card),
+        assignments['31']['card'],
+        dbc.Col(empty_card),
         decisions["no"].get("card"),
-        # dbc.Col(empty_card),
+        dbc.Col(empty_card),
     ],
     className='cards_row'
 )
 
 layout = html.Div(
     [
-        # dbc.Row(
-        #     dbc.Col(row1),
-        #     style={"width":"100%"}
-        # ),
         row1,
-        dbc.Row(
-            dbc.Col(row2),
-            style={"width":"100%"}
-        ),
-        dbc.Row(
-            dbc.Col(row3),
-            style={"width":"100%"}
-        ),
+        row2,
+        row3,
         decisions["yes"].get("modal"),
         decisions["no"].get("modal"),
         final_modal
