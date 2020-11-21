@@ -1,1 +1,1 @@
-web: gunicorn proposal-website:index
+web: gunicorn index
