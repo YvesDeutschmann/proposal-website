@@ -4,10 +4,10 @@ import dash_html_components as html
 import dash_bootstrap_components as dbc
 from dash.dependencies import Input, Output, State
 
-from app import app
 from templates import home, prediction, card_deck
+from app import app
 
-
+# url bar for site navigation
 url_bar_and_content_div = html.Div([
     dcc.Location(id='url', refresh=False),
     html.Div(id='page-content')
@@ -38,7 +38,6 @@ def display_page(pathname):
     else:
         return '404'
 
-
-
 if __name__ == '__main__':
     app.run_server(debug=True)
+

@@ -86,6 +86,7 @@ def generate_mycard(id, image_src, name):
         className = "cards_single",
         id = id)
 
+
 def generate_option_card(option):
     """
     Generates card for answer options.
@@ -206,8 +207,7 @@ def create_card_deck():
         assignments.update({ str(key) : {'card': card}})
     return card_deck
 
-
-
+# create all site elements
 card_deck = create_card_deck()
 decisions = generate_decision_objects()
 empty_card = dbc.Card(className="cards_empty")
@@ -291,6 +291,7 @@ layout = html.Div(
     ]
 )
 
+# card_deck callbacks
 for card in  card_deck:
     @app.callback(
         Output(card, 'className'),

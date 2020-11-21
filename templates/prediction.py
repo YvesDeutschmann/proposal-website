@@ -4,7 +4,6 @@ import dash_html_components as html
 import dash_bootstrap_components as dbc
 from dash.dependencies import Input, Output, State
 
-from app import app
 from graph import load_data, plot_data
 
 button_groups = dbc.Row(
