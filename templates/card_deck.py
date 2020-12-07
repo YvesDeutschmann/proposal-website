@@ -8,7 +8,7 @@ from dash.exceptions import PreventUpdate
 from assignments import assignments
 from app import app
 
-def generate_card(id, image_src, name):
+def generate_card(id, filename, name):
     """
     Creates Html.Div element as flippable card.
     Input:
@@ -23,7 +23,7 @@ def generate_card(id, image_src, name):
         [
             html.Div(
                 html.Img(
-                        src='https://proposal-pics.s3.eu-central-1.amazonaws.com/question.png',
+                        src='http://proposal-pics.s3.amazonaws.com/question.png',
                         className = "cards_image"
                 ),
                 className = "cards_front"
@@ -31,7 +31,7 @@ def generate_card(id, image_src, name):
             html.Div(
                 [
                     html.Img(
-                        src=image_src,
+                        src='http://proposal-pics.s3.amazonaws.com/{}'.format(filename),
                         className = "cards_image"
                     ),
                     html.H1(
@@ -45,7 +45,7 @@ def generate_card(id, image_src, name):
         className = "cards_single",
         id = id)
 
-def generate_mycard(id, image_src, name):
+def generate_mycard(id, filename, name):
     """
     Creates Html.Div element as flippable card.
     Input:
@@ -60,7 +60,7 @@ def generate_mycard(id, image_src, name):
         [
             html.Div(
                 html.Img(
-                        src='https://proposal-pics.s3.eu-central-1.amazonaws.com/question.png',
+                        src='http://proposal-pics.s3.amazonaws.com/question.png',
                         className = "cards_image"
                 ),
                 className = "cards_front"
@@ -68,7 +68,7 @@ def generate_mycard(id, image_src, name):
             html.Div(
                 [
                     html.Img(
-                        src=image_src,
+                        src='http://proposal-pics.s3.amazonaws.com/{}'.format(filename),
                         className='cards_image'
                     ),
                         
@@ -199,9 +199,9 @@ def create_card_deck():
 
     for key, element in assignments.items():
         if key == '31':
-            card = generate_mycard(element.get("id"), element.get("source"), element.get("name"))
+            card = generate_mycard(element.get("id"), element.get("image"), element.get("name"))
         else:
-            card = generate_card(element.get("id"), element.get("source"), element.get("name"))
+            card = generate_card(element.get("id"), element.get("image"), element.get("name"))
         
         card_deck.append(element.get("id"))
         assignments.update({ str(key) : {'card': card}})

@@ -2,8 +2,7 @@ assignments = {
     '11': {
         'id': '11',
         'name': 'Bonnie & Jerry',
-        'image': '11.jpg',
-        'source': 'https://proposal-pics.s3-us-west-2.amazonaws.com/11.jpg'
+        'image': '11.jpg'        
     },
     '12': {
         'id': '12',
