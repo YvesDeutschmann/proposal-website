@@ -23,7 +23,7 @@ def generate_card(id, filename, name):
         [
             html.Div(
                 html.Img(
-                        src='http://proposal-pics.s3.amazonaws.com/question.png',
+                        src=app.get_asset_url('question.png'),
                         className = "cards_image"
                 ),
                 className = "cards_front"
@@ -31,7 +31,7 @@ def generate_card(id, filename, name):
             html.Div(
                 [
                     html.Img(
-                        src='http://proposal-pics.s3.amazonaws.com/{}'.format(filename),
+                        src=app.get_asset_url(filename),
                         className = "cards_image"
                     ),
                     html.H1(
@@ -60,7 +60,7 @@ def generate_mycard(id, filename, name):
         [
             html.Div(
                 html.Img(
-                        src='http://proposal-pics.s3.amazonaws.com/question.png',
+                        src=app.get_asset_url('question.png'),
                         className = "cards_image"
                 ),
                 className = "cards_front"
@@ -68,7 +68,7 @@ def generate_mycard(id, filename, name):
             html.Div(
                 [
                     html.Img(
-                        src='http://proposal-pics.s3.amazonaws.com/{}'.format(filename),
+                        src=app.get_asset_url(filename),
                         className='cards_image'
                     ),
                         
