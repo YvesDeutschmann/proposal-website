@@ -49,7 +49,7 @@ assignments = {
     '22': {
         'id': '22',
         'name': 'Tiffany',
-        'image': '22.jpg',
+        'image': '22.png',
         'source': 'https://proposal-pics.s3-us-west-2.amazonaws.com/22.JPG'
     },
     '23': {
