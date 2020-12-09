@@ -61,7 +61,7 @@ assignments = {
     '24': {
         'id': '24',
         'name': 'Taylor & Lindsay',
-        'image': '24.jpg',
+        'image': '24.png',
         'source': 'https://proposal-pics.s3-us-west-2.amazonaws.com/24.JPG'
     },
     '25': {
