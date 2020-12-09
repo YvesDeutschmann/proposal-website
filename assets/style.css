@@ -7,7 +7,6 @@
 }
 
 .cards_single {
-  background: lightslategray;
   display: flex;
   flex-direction: column;
   margin-top: 20px;
@@ -44,6 +43,7 @@
   flex-direction: column;
 }
 .cards_front {
+  background: lightslategray;
   height: 100%;
   transform: rotateX(0deg);
   -webkit-transform: rotateX(0deg);
